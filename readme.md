@@ -1,6 +1,6 @@
 # ZA Phone
 
-[![Packagist](https://img.shields.io/packagist/v/rockett/za-phone.svg?style=flat-square)]()
+[![GitHub release](https://img.shields.io/github/release/mikerockett/za-phone.svg?style=flat-square)]()
 [![License](https://img.shields.io/github/license/mikerockett/za-phone.svg?style=flat-square)]()
 [![Travis](https://img.shields.io/travis/mikerockett/za-phone.svg?style=flat-square)]()
 
