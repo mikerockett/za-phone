@@ -1,3 +1,4 @@
 vendor/
 .phpintel/
+.phpcompat/
 composer.lock

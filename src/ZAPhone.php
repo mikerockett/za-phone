@@ -19,7 +19,7 @@ class ZAPhone
      * @param string $phone
      * @param array  $parts
      */
-    public function __construct(string $phone = null, array $parts = [])
+    public function __construct($phone = null, array $parts = [])
     {
         if ($phone && $parts) {
             $this->parts = (object) array_combine([
@@ -36,7 +36,7 @@ class ZAPhone
      * @param  string        $part
      * @return string|null
      */
-    final public function __get(string $part)
+    final public function __get($part)
     {
         if (property_exists($this->parts, $part)) {
             return $this->parts->$part;
@@ -57,7 +57,7 @@ class ZAPhone
      * @param  string  $phone
      * @return ZaPhone (new)
      */
-    final public function check(string $phone)
+    final public function check($phone)
     {
         // Sanitise the input before passing it to a regex filter for validation
         $phone = str_replace(['+', '-'], '', filter_var($phone, FILTER_SANITIZE_NUMBER_INT));
@@ -81,7 +81,7 @@ class ZAPhone
      * @param  $fromCountry ISO 3166-1 alpha-3 format
      * @return string
      */
-    final public function formatDialIn(string $fromCountry = 'USA')
+    final public function formatDialIn($fromCountry = 'USA')
     {
         if (!$fromCountry) {
             throw new Exceptions\InvalidArgumentException('To format a phone number for international dialling, you need to set a valid country code from which the call would be made. Ex: US or AU');
@@ -120,7 +120,7 @@ class ZAPhone
      * and optional parenthises and hyphens
      * @return string
      */
-    final public function formatNational(bool $landlineParenthises = false, bool $hyphens = false)
+    final public function formatNational($landlineParenthises = false, $hyphens = false)
     {
         $prefix = "0{$this->prefix}";
         $sep = $hyphens ? '-' : ' ';
@@ -147,7 +147,7 @@ class ZAPhone
      * @param  string  $filePath
      * @return array
      */
-    final protected function readFileLines(string $filePath)
+    final protected function readFileLines($filePath)
     {
         if (!is_readable($filePath) || !is_file($filePath)) {
             throw new Exceptions\InvalidPathException(sprintf('Unable to read the INI file at %s.', $filePath));

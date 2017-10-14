@@ -18,7 +18,7 @@ class ZAPhoneValidator
      * @param  $validator
      * @return bool
      */
-    public function validate(string $attribute, string $value, array $parameters, $validator)
+    public function validate($attribute, $value, array $parameters, $validator)
     {
         // Returning false here means that the number provided is
         // not parseable in any way. Any false returns after this
