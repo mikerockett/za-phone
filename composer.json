@@ -1,7 +1,7 @@
 {
     "name": "rockett/za-phone",
     "description": "Parses and validates South African phone numbers.",
-    "keywords": ["phone", "south africa", "format"],
+    "keywords": ["phone-number", "south africa", "validator", "parser", "formatter", "laravel"],
     "license": "MIT",
     "authors": [
         {
