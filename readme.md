@@ -1,5 +1,8 @@
 # ZA Phone
 
+[![Packagist](https://img.shields.io/packagist/v/rockett/za-phone.svg?style=flat-square)]()
+[![license](https://img.shields.io/github/license/mikerockett/za-phone.svg?style=flat-square)]()
+
 An easy-to-use validator and formatter for South African phone numbers.
 
 ## Installation
