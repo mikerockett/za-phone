@@ -61,10 +61,10 @@ class ZAPhone
     {
         // Sanitise the input before passing it to a regex filter for validation
         $phone = str_replace(['+', '-'], '', filter_var($phone, FILTER_SANITIZE_NUMBER_INT));
-        if (!preg_match("/^
+        if (!preg_match('/^
             (?:27|0) # country code
             (
-                (" . self::LANDLINE_SUB_EXPR . '|' . self::MOBILE_SUB_EXPR . ") # either landline or mobile
+                (' . self::LANDLINE_SUB_EXPR . '|' . self::MOBILE_SUB_EXPR . ") # either landline or mobile
                 (\d{3})(\d{4}) # remaining digits
             )
         $/x", $phone, $parts)) {
@@ -78,7 +78,9 @@ class ZAPhone
     /**
      * Format the number for dialling in from another country
      * Ex: 011 27 821234567 for the United States
-     * @param  $fromCountry ISO 3166-1 alpha-3 format
+     * Format: ISO 3166-1 alpha-3
+     * @param  string   $fromCountry
+     * @throws mixed
      * @return string
      */
     final public function formatDialIn($fromCountry = 'USA')
@@ -123,14 +125,14 @@ class ZAPhone
     final public function formatNational($landlineParenthises = false, $hyphens = false)
     {
         $prefix = "0{$this->prefix}";
-        $sep = $hyphens ? '-' : ' ';
+        $sep = [' ', '-'][$hyphens];
         $initialSep = $sep;
         if ($landlineParenthises && preg_match('/' . self::LANDLINE_SUB_EXPR . '/', $this->prefix)) {
             $prefix = "($prefix)";
             $initialSep = ' ';
         }
 
-        return "{$prefix}$initialSep{$this->three}$sep{$this->four}";
+        return "$prefix$initialSep{$this->three}$sep{$this->four}";
     }
 
     /**
@@ -144,7 +146,8 @@ class ZAPhone
 
     /**
      * Get lines from an INI-formatted file
-     * @param  string  $filePath
+     * @param  string                 $filePath
+     * @throws InvalidPathException
      * @return array
      */
     final protected function readFileLines($filePath)
