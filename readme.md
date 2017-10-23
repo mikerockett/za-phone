@@ -12,7 +12,7 @@ An easy-to-use validator and formatter for South African phone numbers.
 composer require rockett/za-phone
 ```
 
-If you’re using Laravel 5.5, the service provider, which only provides validation features, will be detected automatically via package discovery. You can opt our of this be adding the following to your app’s `composer.json`:
+If you’re using Laravel 5.5, the service provider (which only provides validation features) will be detected automatically via package-discovery. You can opt out of this be adding the following to your app’s `composer.json`:
 
 ```json
 "extra": {
@@ -25,7 +25,7 @@ If you’re using Laravel 5.5, the service provider, which only provides validat
 ```
 
 
-If you’d like to use validation and you’re On Laravel 5.4, add `Rockett\Toolkit\Providers\ZAPhoneServiceProvider::class` to your `config/app.php` `providers` array.
+If you’d like to use validation and you’re on Laravel 5.4, add `Rockett\Toolkit\Providers\ZAPhoneServiceProvider::class` to your `config/app.php` `providers` array.
 
 ## Usage
 
@@ -45,7 +45,7 @@ if (!$phone = ZAPhone::check('0125559999')) {
 
 ### Input Formats
 
-You can use any format you like for the phone number, as it'll strip out anything it doesn't need. The purpose of this package is to validate *and* format the number according to your needs, and so it should be used on direct user input, say, from a form. Here’s a few examples of formats that’ll be accepted:
+You can use any format you like for the phone number, as it’ll strip out anything it doesn’t need. The purpose of this package is to validate *and* format the number according to your needs, and so it should be used on direct user input, say, from a form. Here’s a few examples of formats that’ll be accepted:
 
 ```
 +27113330000
@@ -55,11 +55,11 @@ You can use any format you like for the phone number, as it'll strip out anythin
 +27 (11) 525 9500
 ```
 
-At the end of the day, gobbledygook-formatting (`+27 11/329.6200`) will be accepted, stripped, and validated. *But*, if the resulting number after stripping is not valid, then `check` will return `false`.
+At the end of the day, *gobbledygook*-formatting (`+27 11/329.6200`) will be accepted, stripped, and validated. *But*, if the resulting number after stripping is not valid, then `check` will return `false`.
 
 ### Output Formatting
 
-If the number is valid, you can then return the phone number in the format of your choosing. Available methods include those shown below:
+If the number is valid, you can then return the phone number in the format of your choosing. Available methods include:
 
 ```php
 print $phone->formatNational();
@@ -75,7 +75,7 @@ print $phone->formatRFC3966();
 // +27-12-555-9999
 ```
 
-You can also format the number using another country’s exit code. This will prefix the code to the number, showing how the number should be dialled from another country. The country code argument needs to be specified in [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) format.
+You can also format the number using another country’s exit-code. This will prefix the code to the number, showing how the number should be dialled from another country. The country code argument needs to be specified in [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) format.
 
 ```php
 print $phone->formatDialIn('USA');
@@ -122,7 +122,7 @@ print $phone->formatNational(false, true);
 
 ### Getters
 
-Occasionally, you may need to access the different parts of the number. You can use the `number`, `prefix`, `three`, and `four` getters for this. Note, however, that `number` will not include the leading zero.
+Occasionally, you may need to access the different parts of the number. You can use the `number`, `prefix`, `three`, and `four` getters for this. Note, however, that the leading zero will not be included in `number` and `prefix`.
 
 ```php
 print $phone->prefix;
@@ -131,11 +131,7 @@ print $phone->prefix;
 
 ### Validation
 
-The package also makes a rule and validator available, and each of them allow you to specify an optional format that the phone number should be provided by the user.
-
-> **Note:** In all honesty, forcing a format isn’t really necessary, given that the package is designed for you to validate any input that can be translated into a valid phone number **and** format it according to your app’s needs (database storage, etc.). As such, simply using the validation rule without forcing a format will suffice for most needs.
-
-When using the `Rule` method, don’t forget to `use Illuminate\Validation\Rule;`.
+The package also makes a *Rule* and validator available, and each of them allow you to specify an optional format that the phone number should be provided by the user.
 
 ```php
 'phone_number_field': 'required|zaphone',
@@ -144,11 +140,13 @@ When using the `Rule` method, don’t forget to `use Illuminate\Validation\Rule;
 'phone_number_field': ['required', Rule::zaphone()->format('intl')],
 ```
 
-> Note that the format parameter is case-sensitive. Accepts `national`, `intl`, `E164`, and `RFC3966`.
+> When using the `Rule` method, don’t forget to `use Illuminate\Validation\Rule;`. Note that `format()`’s parameter is case-sensitive, and accepts `national`, `intl`, `E164`, and `RFC3966`.
+
+> In all honesty, forcing a format isn’t really necessary, given that the package is designed for you to validate any input that can be translated into a valid phone number ***and*** format it according to your app’s needs (database storage, etc.). As such, simply using the validation rule without forcing a format will suffice for most needs.
 
 ## Testing
 
-Tests are powered by Orchestral’s test bench. To test the package, simply navigate to its directory, run `composer install` and then `phpunit`.
+Tests are powered by Orchestra’s test-bench. To test the package, simply navigate to its directory, run `composer install` and then `phpunit`.
 
 ## Need something more advanced?
 
