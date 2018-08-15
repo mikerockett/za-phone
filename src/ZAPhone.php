@@ -5,7 +5,6 @@ namespace Rockett\Toolkit;
 class ZAPhone
 {
     const LANDLINE_SUB_EXPR = '1[0-8]|2[1-4-7-8]|3[1-69]|4[\d]|5[1346-8]';
-
     const MOBILE_SUB_EXPR = '6[0-6]|7[1-46-9]|6[1-3]|8[1-4]';
 
     /**
@@ -73,6 +72,21 @@ class ZAPhone
         unset($parts[0]);
 
         return new static($phone, $parts);
+    }
+
+    /**
+     * Check if the number is a mobile or landline.
+     * @param  string  $type
+     * @return bool
+     */
+    final public function is(string $type)
+    {
+        $exprType = [
+            'landline' => self::LANDLINE_SUB_EXPR,
+            'mobile' => self::MOBILE_SUB_EXPR,
+        ][$type];
+
+        return preg_match("/$exprType/", $this->prefix);
     }
 
     /**

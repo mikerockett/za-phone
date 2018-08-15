@@ -27,16 +27,23 @@ class ZAPhoneValidator
             return false;
         }
 
+        // Check for mobile, landline constraint.
+        if (isset($parameters[0]) && $typeConstraint = $parameters[0]) {
+            if (preg_match('/(mobile|landline)/i', $typeConstraint)) {
+                $typeConstraint = $phone->is($typeConstraint);
+            }
+        }
+
         // Check for formatting requirements, or pass validation.
-        if (isset($parameters[0]) && $format = $parameters[0]) {
+        $formatConstraint = isset($typeConstraint) ? 1 : 0;
+        if (isset($parameters[$formatConstraint]) && $format = $parameters[$formatConstraint]) {
             switch ($format) {
                 case 'E164':
                 case 'intl':
                 case 'national':
                 case 'RFC3966':
                     $formatter = 'format' . ucfirst($format);
-
-                    return $value === $phone->$formatter();
+                    $formatConstraint = $value === $phone->$formatter();
                     break;
                 default:
                     // The format doesn't exist, so throw an exception
@@ -44,7 +51,9 @@ class ZAPhoneValidator
                     break;
             }
         } else {
-            return true;
+            $formatConstraint = true;
         }
+
+        return isset($typeConstraint) ? ($typeConstraint && $formatConstraint) : $formatConstraint;
     }
 }
