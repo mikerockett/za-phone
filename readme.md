@@ -1,5 +1,7 @@
 # ZA Phone
 
+> 💤 This package has been retired. Use https://github.com/Propaganistas/Laravel-Phone instead.
+
 [![GitHub release](https://img.shields.io/github/release/mikerockett/za-phone.svg?style=flat-square)](https://github.com/mikerockett/za-phone/releases)
 [![License](https://img.shields.io/github/license/mikerockett/za-phone.svg?style=flat-square)](https://github.com/mikerockett/za-phone/blob/master/LICENSE.md)
 [![Travis](https://img.shields.io/travis/mikerockett/za-phone.svg?style=flat-square)](https://travis-ci.org/mikerockett/za-phone)
